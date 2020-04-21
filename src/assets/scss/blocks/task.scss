@@ -1,0 +1,86 @@
+.task-list {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: repeat(auto-fit, 335px);
+}
+.form {
+  position: relative;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: max-content 1fr max-content;
+
+  transition: all 0.5s;
+  background-color: white;
+  height: 273px;
+  width: 273px;
+  padding: 30px;
+  border: 1px solid $lightGray;
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid $lightGray;
+    padding-bottom: 20px;
+  }
+  &__title {
+    @include header-text;
+    width: calc(100% - 60px);
+    margin-left: 10px;
+  }
+  &__discription {
+    @include normal-text;
+    position: relative;
+  }
+  &:hover {
+    border: 1px solid $gray;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .task-list {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vw;
+    transform: rotate(-90deg);
+    .task-item {
+      transform: rotate(90deg);
+      width: calc(100vw - 120px);
+      height: calc(100vw - 120px);
+      margin: 16px;
+    }
+  }
+  .task-maker{
+    width: calc(100% - 60px) !important;
+    margin-bottom: 0px !important;
+  }
+}
+
+.complited {
+  .form__title {
+    text-decoration: line-through;
+  }
+}
+
+.task-maker{
+  position: absolute;
+  width: 340px;
+  top: -100px;
+  margin-bottom: 20px;
+  z-index: 99;
+  .form__title::placeholder{
+    color: #d6d6d6;
+  }
+  .form__discription{
+    height: 100px;
+  }
+  .form__footer {
+    display: flex;
+    align-items: center;
+  }
+  .btn-plus {
+    margin-right: 0;
+    margin-left: auto;
+  }
+}

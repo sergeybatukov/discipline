@@ -1,0 +1,14 @@
+@import './btn.scss';
+@import './checkbox.scss';
+@import './popup.scss';
+@import './palette.scss';
+
+.content-wrapper {
+  position: relative;
+  padding: 0 60px;
+}
+@media screen and (max-width: 500px) {
+  .content-wrapper {
+    padding: 0 16px;
+  }
+}

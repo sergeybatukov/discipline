@@ -1,0 +1,43 @@
+.login {
+  position: relative;
+  display: grid;
+  grid-gap: 20px;
+  grid-template-rows: repeat(auto-fix, min-content);
+
+  transition: all 0.5s;
+  background-color: white;
+  height: 273px;
+  width: 273px;
+  padding: 30px;
+  border: 1px solid $lightGray;
+  &__header {
+    position: relative;
+  }
+  &__title {
+    @include header-text;
+  }
+  &__input {
+    @include normal-text;
+    padding: 15px 20px;
+    border: 1px solid $lightGray;
+    &:hover {
+      border: 1px solid $gray;
+    }
+  }
+  &__footer {
+    @include normal-text;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__submit {
+    @include normal-text;
+    padding: 15px 20px;
+    background-color: $lightGray;
+    border: none;
+    height: 100%;
+    &:hover {
+      border: 1px solid $gray;
+    }
+  }
+}

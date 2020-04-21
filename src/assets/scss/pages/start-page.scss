@@ -1,0 +1,26 @@
+.page-wrapper {
+  height: calc(100vh - 130px);
+  width: calc(100vw - 36px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  &__grid {
+    display: grid;
+    justify-content: center;
+    grid-gap: 20px;
+    grid-template-rows: repeat(2, max-content);
+  }
+  &__header {
+    align-self: center;
+  }
+  &__title {
+    font-family: Montserrat;
+    font-weight: 900;
+    font-size: 50px;
+  }
+  .btn_animate {
+    justify-self: right;
+    width: 100px;
+  }
+}

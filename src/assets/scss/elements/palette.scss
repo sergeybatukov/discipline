@@ -1,0 +1,48 @@
+.palette {
+  display: flex;
+  * {
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+}
+.blue {
+  background-color: $blue;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+.red {
+  background-color: $red;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+.yellow {
+  background-color: $yellow;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+.green {
+  background-color: $green;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+.purple {
+  background-color: $purple;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+}
+.white {
+  background-color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 10px;
+  border: 1px solid $lightGray;
+}

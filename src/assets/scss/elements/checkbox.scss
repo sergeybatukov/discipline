@@ -1,0 +1,41 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 0;
+  margin-left: auto;
+}
+.checkbox__input{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  position: relative;
+  background-color: #f1f3f6;
+  &::after{
+    transition: all 0.3s;
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url('../img/check.svg') no-repeat;
+    background-size: 14px 14px;
+    background-position: center;
+    opacity: 0;
+    transform: rotate(20deg);
+    position: absolute;
+    z-index: 2;
+  }
+}
+.checkbox__label {
+  display: inline-block;
+  @include normal-text;
+  margin-right: 10px;
+}
+.checkbox_active {
+  &::after{
+    transition: all 0.3s;
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
