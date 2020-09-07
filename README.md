@@ -1,16 +1,19 @@
-# Discipline
+# constructor
 
-## Установка
+## Project setup
 ```
 npm install
 ```
 
-### Запуск сервера Vue
+### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Сборка
+### Compiles and minifies for production
 ```
 npm run build
 ```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
