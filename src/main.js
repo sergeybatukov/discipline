@@ -1,38 +1,33 @@
 import Vue from 'vue'
-import Vuelidate from 'vuelidate'
 import App from './App.vue'
-import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import * as fb from 'firebase'
-import './assets/scss/main.scss'
+import './scss/main.scss'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/database'
+import 'firebase/storage'
 
 Vue.config.productionTip = false
-
-Vue.use(Vuelidate)
 
 new Vue({
   router,
   store,
+  render: h => h(App),
   created () {
     var firebaseConfig = {
-      apiKey: 'AIzaSyCxlTJvyb1_xMsrSNl2YpeUKKgqzzmUKzM',
-      authDomain: 'discipline-6268c.firebaseapp.com',
-      databaseURL: 'https://discipline-6268c.firebaseio.com',
-      projectId: 'discipline-6268c',
-      storageBucket: 'discipline-6268c.appspot.com',
-      messagingSenderId: '854935164035',
-      appId: '1:854935164035:web:287fc19995e557a9bab7b6',
-      measurementId: 'G-EPJPL1Z8NB'
+      apiKey: "AIzaSyCxlTJvyb1_xMsrSNl2YpeUKKgqzzmUKzM",
+      authDomain: "discipline-6268c.firebaseapp.com",
+      databaseURL: "https://discipline-6268c.firebaseio.com",
+      projectId: "discipline-6268c",
+      storageBucket: "discipline-6268c.appspot.com",
+      messagingSenderId: "854935164035",
+      appId: "1:854935164035:web:b9301043a404a163bab7b6",
+      measurementId: "G-5R19Y45F42"
     }
-    fb.initializeApp(firebaseConfig)
-    fb.analytics()
-    fb.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.$store.dispatch('AutoLoginUser', user)
-      }
-      this.$store.dispatch('loadTasks')
-    })
-  },
-  render: h => h(App)
+    firebase.initializeApp(firebaseConfig)
+    this.$store.dispatch('loadTasks')
+    // this.$store.dispatch('loadIcons')
+  }
 }).$mount('#app')
+
