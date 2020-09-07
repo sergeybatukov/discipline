@@ -26,7 +26,12 @@ new Vue({
       measurementId: "G-5R19Y45F42"
     }
     firebase.initializeApp(firebaseConfig)
-    this.$store.dispatch('loadTasks')
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch('AutoLoginUser', user)
+      }
+    })
+    // this.$store.dispatch('loadTasks')
     // this.$store.dispatch('loadIcons')
   }
 }).$mount('#app')

@@ -1,0 +1,42 @@
+$form_bg: white;
+$font-family: Montserrat;
+$form_padding: 40px;
+$main_color: #292929;
+$second_color: #476DD5;
+$main_border: 1px solid $main_color;
+* {
+  font-family: $font-family;
+}
+
+input {
+  margin-bottom: 20px;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid $main_color;
+  outline: none;
+  font-size: 14px;
+  &:focus {
+    border-bottom: 1px solid $second_color;
+  }
+}
+button {
+  transition: all ease .3s;
+  background: $main_color;
+  color: $second_color;
+  outline: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  border: $main_border;
+  padding: 20px;
+  &:hover {
+    transition: all ease .3s;
+    background: $form_bg;
+    color: $main_color;
+  }
+}
+.Loader {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 999;
+}

@@ -1,6 +1,9 @@
 const mutations = {
-  loadTasks (state, payload) {
-    state.tasks = payload
+  loading (state, payload) {
+    state.loading = payload
+  },
+  setUser (state, payload) {
+    state.user = payload
   }
 }
 

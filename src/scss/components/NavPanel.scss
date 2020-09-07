@@ -1,0 +1,30 @@
+.NavPanel {
+  width: 100vw;
+  height: 60px;
+  background: $form_bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .popup {
+    top: -40px;
+    left: -40px;
+  }
+  // border: $main_border;
+  &_links-container {
+    display: flex;
+  }
+  &_link {
+    margin: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  &_btn {
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  &_user {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+  }
+}

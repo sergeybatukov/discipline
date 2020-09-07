@@ -2,7 +2,8 @@ const state = {
   user: {},
   users: [],
   projects: [],
-  tasks: []
+  tasks: [],
+  loading: false
 }
 
 export default state

@@ -1,0 +1,15 @@
+.SingIn {
+  background: $form_bg;
+  // border: $main_border;
+  padding: $form_padding;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  border-radius: 40px;
+  span {
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-top: 20px;
+  }
+}

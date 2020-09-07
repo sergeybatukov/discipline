@@ -19,37 +19,74 @@ const actions = {
       console.log(error)
     }
   },
-  async newComp ({ commit }, payload) {
+  async newUser ({ commit }, payload) {
     try {
-      const compNew = {
-        id: payload.id,
-        name: payload.name
+      commit('loading', true)
+      const newUser = {
+        id: null,
+        key: null,
+        name: payload.name,
+        lastName: payload.lastName,
+        email: payload.email,
+        avatar: null
       }
-      const comp = await firebase.database().ref('components').push(compNew)
-      const stateOnData = await firebase.storage().ref('components/' + comp.key + '_on.svg').put(payload.stateOn)
-      const stateOnUrl = await stateOnData.ref.getDownloadURL()
-      const stateOffData = await firebase.storage().ref('components/' + comp.key + '_off.svg').put(payload.stateOff)
-      const stateOffUrl = await stateOffData.ref.getDownloadURL()
-      const stateWarningData = await firebase.storage().ref('components/' + comp.key + '_warning.svg').put(payload.stateWarning)
-      const stateWarningUrl = await stateWarningData.ref.getDownloadURL()
-      const stateCriticalData = await firebase.storage().ref('components/' + comp.key + '_critical.svg').put(payload.stateCritical)
-      const stateCriticalUrl = await stateCriticalData.ref.getDownloadURL()
-      await firebase.database().ref('components').child(comp.key).update({
-        stateOn: stateOnUrl,
-        stateOff: stateOffUrl,
-        stateWarning: stateWarningUrl,
-        stateCritical: stateCriticalUrl
+      const user = await firebase.database().ref('users').push(newUser)
+      const reg = await firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+      await firebase.database().ref('users').child(user.key).update({
+        key: user.key,
+        id: reg.user.uid
       })
-      commit('newComp', {
-        ...compNew,
-        stateOn: stateOnUrl,
-        stateOff: stateOffUrl,
-        stateWarning: stateWarningUrl,
-        stateCritical: stateCriticalUrl
+      newUser.key = user.key
+      newUser.id = reg.user.uid
+      commit('setUser', newUser)
+      commit('loading', false)
+      // location.href = '#/admin'
+    } catch (error) {
+      console.lor(error)
+    }
+  },
+  async login({ commit }, payload) {
+    try {
+      commit('loading', true)
+      let usr = {}
+      const userSingIn = await firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+      const userData = await firebase.database().ref('users').once('value')
+      Object.keys(userData.val()).forEach(key => {
+        if (userData.val()[key].id === userSingIn.user.uid) {
+          usr = userData.val()[key]
+        }
       })
+      commit('setUser', usr)
+      commit('loading', false)
+      // location.href = '#/user'
     } catch (error) {
       console.log(error)
     }
+  },
+  async AutoLoginUser({ commit }, payload) {
+    try {
+      commit('loading', true)
+      let usr = {}
+      const userData = await firebase.database().ref('users').once('value')
+      Object.keys(userData.val()).forEach(key => {
+        if (userData.val()[key].id === payload.uid) {
+          usr = userData.val()[key]
+        }
+      })
+
+      commit('setUser', usr)
+      commit('loading', false)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  logoutUser({ commit }) {
+    commit('loading', true)
+    firebase.auth().signOut()
+    commit('setUser', null)
+    location.href = '#/'
+    commit('loading', false)
+    location.reload()
   }
 }
 

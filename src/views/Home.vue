@@ -21,3 +21,18 @@ export default {
 }
 
 </script>
+<template lang="pug">
+  .Home
+    Projects
+</template>
+
+<script>
+import Projects from '@/components/forms/Projects'
+
+export default {
+  name: 'Home',
+  components: {
+    Projects
+  }
+}
+</script>
