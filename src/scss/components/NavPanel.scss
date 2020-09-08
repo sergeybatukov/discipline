@@ -1,8 +1,7 @@
 .NavPanel {
+  @include form;
   width: 100vw;
   height: 60px;
-  background: $form_bg;
-  display: flex;
   justify-content: center;
   align-items: center;
   .popup {

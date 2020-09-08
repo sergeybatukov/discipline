@@ -3,7 +3,8 @@ const state = {
   users: [],
   projects: [],
   tasks: [],
-  loading: false
+  loading: false,
+  selectProject: {}
 }
 
 export default state

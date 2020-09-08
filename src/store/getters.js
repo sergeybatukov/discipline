@@ -3,6 +3,7 @@ const getters = {
   users: state => state.users,
   projects: state => state.projects,
   tasks: state => state.tasks,
-  loading: state => state.loading
+  loading: state => state.loading,
+  selectProject: state => state.selectProject
 }
 export default getters

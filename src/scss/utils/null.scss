@@ -5,19 +5,18 @@ body {
   }
   background: #f1f3f6;
 }
-h1 {
+h1, h2 {
   margin: 0;
   margin-bottom: 20px;
 }
 
-.popup {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+p {
+  margin: 0
+}
+
+* {
+  font-family: $font-family;
+  &::-webkit-scrollbar { width: 0; }
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
 }

@@ -1,7 +1,5 @@
 .UserPanel {
-  padding: $form_padding;
-  background: $form_bg;
-  border-radius: 40px;
+  @include form;
   &_header {
     &-name {
       font-size: 30px;

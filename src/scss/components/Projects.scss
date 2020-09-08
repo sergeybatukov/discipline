@@ -1,13 +1,50 @@
 .Projects {
-  display: flex;
-  padding: 40px;
+  @include container;
+  flex-direction: column;
+  input, textarea {
+    margin-bottom: 20px;
+  }
   &_list{
     &-item {
+      @include form;
+      flex-direction: column;
       width: 300px;
       height: 200px;
-      background: $form_bg;
-      border-radius: 40px;
-      box-shadow: 0px 70px 40px -40px rgba(0,0,0, 0.3);
+      box-shadow: $shadow;
+      margin: 20px 0;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+  }
+  &_body {
+    display: flex;
+    height: 100%;
+  }
+  &_tasks-list {
+    width: 100%;
+    @include form;
+    flex-direction: column;
+    margin: 20px 0;
+    &_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+  }
+  &_tasks-make {
+    @include form;
+    input {
+      @include bigText;
+    }
+    flex-direction: column;
+  }
+  &_newProject {
+    @include form;
+    width: 600px;
+    height: 400px;
+    flex-direction: column;
+    input {
+      @include bigText;
     }
   }
 }

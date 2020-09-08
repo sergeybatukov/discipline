@@ -1,11 +1,10 @@
 .SingIn {
-  background: $form_bg;
-  // border: $main_border;
-  padding: $form_padding;
-  display: flex;
+  @include form;
   flex-direction: column;
   width: 400px;
-  border-radius: 40px;
+  input {
+    margin-bottom: 20px;
+  }
   span {
     cursor: pointer;
     font-size: 14px;

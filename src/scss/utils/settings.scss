@@ -1,42 +1,115 @@
-$form_bg: white;
+$dark_color: #2C3E50;
+$error_color: #E74C3C;
+$light_color: #FFFFFF;
+$gray: #f1f3f6;
+$first_color: #3498DB;
+$second_color: #2980B9;
+$shadow_color: rgba(52, 152, 219, 0.3);
 $font-family: Montserrat;
+
 $form_padding: 40px;
-$main_color: #292929;
-$second_color: #476DD5;
-$main_border: 1px solid $main_color;
-* {
-  font-family: $font-family;
+$input_padding: 12px 0px;
+$btn_padding: 12px 20px;
+
+$form_border-radius: 40px;
+
+$shadow: 0px 70px 40px -40px $shadow_color;
+
+// text
+@mixin bigText {
+  font-size: 40px;
+  font-weight: bold;
+}
+@mixin accentText {
+  font-size: 18px;
+  font-weight: bold;
+}
+@mixin normalText {
+  font-size: 16px;
+  font-weight: normal;
+}
+@mixin smallText {
+  font-size: 12px;
+  font-weight: normal;
+}
+h1 {@include bigText;}
+h2 {@include accentText;}
+
+// form
+@mixin form {
+  background: $light_color;
+  padding: $form_padding;
+  border-radius: $form_border-radius;
+  display: flex;
+  box-shadow: $shadow;
 }
 
-input {
-  margin-bottom: 20px;
-  height: 40px;
-  border: none;
-  border-bottom: 1px solid $main_color;
+@mixin container {
+  display: flex;
+  padding: $form_padding;
+}
+
+// button
+@mixin btn {
+  @include normalText;
+  color: $light_color;
+  transition: all ease .3s;
+  background: $first_color;
+  border-radius: 5px;;
   outline: none;
-  font-size: 14px;
-  &:focus {
-    border-bottom: 1px solid $second_color;
+  text-transform: uppercase;
+  border: 1px solid $first_color;
+  padding: $btn_padding;
+  &:hover {
+    transition: all ease .3s;
+    background: $second_color;
   }
 }
 button {
-  transition: all ease .3s;
-  background: $main_color;
-  color: $second_color;
+  @include btn;
+}
+
+// inputs
+@mixin input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid $dark_color;
   outline: none;
-  font-size: 14px;
-  text-transform: uppercase;
-  border: $main_border;
-  padding: 20px;
-  &:hover {
-    transition: all ease .3s;
-    background: $form_bg;
-    color: $main_color;
+  padding: $input_padding;
+  color: $dark_color;
+  @include normalText;
+  &:focus {
+    border-bottom: 1px solid $first_color;
   }
 }
+input {
+  @include input;
+}
+
+@mixin textarea {
+  resize: none;
+  @include input;
+}
+textarea {
+  @include textarea;
+  height: 100%;
+}
+
 .Loader {
   position: absolute;
   top:0;
   left:0;
   z-index: 999;
+}
+.popup {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
 }

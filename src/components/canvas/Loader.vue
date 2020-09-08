@@ -1,5 +1,5 @@
 <template lang="pug">
-  .Loader
+  .popup
     canvas#bg(ref='bg')
 </template>
 

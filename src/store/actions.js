@@ -19,6 +19,7 @@ const actions = {
       console.log(error)
     }
   },
+
   async newUser ({ commit }, payload) {
     try {
       commit('loading', true)
@@ -56,10 +57,24 @@ const actions = {
           usr = userData.val()[key]
         }
       })
+      const projectsData = await firebase.database().ref('projects').once('value')
+      if (projectsData.val() != null) {
+        let projects = []
+        Object.keys(projectsData.val()).forEach(key => {
+          const userList = projectsData.val()[key].users
+          for(let i in userList) {
+            if (userList[i] === usr.key) {
+              projects.push(projectsData.val()[key])
+            }
+          }
+        })
+        commit('setProjects', projects)
+      }
       commit('setUser', usr)
       commit('loading', false)
       // location.href = '#/user'
     } catch (error) {
+      commit('loading', false)
       console.log(error)
     }
   },
@@ -73,10 +88,23 @@ const actions = {
           usr = userData.val()[key]
         }
       })
-
+      const projectsData = await firebase.database().ref('projects').once('value')
+      if (projectsData.val() != null) {
+        let projects = []
+        Object.keys(projectsData.val()).forEach(key => {
+          const userList = projectsData.val()[key].users
+          for (let i in userList) {
+            if (userList[i] === usr.key) {
+              projects.push(projectsData.val()[key])
+            }
+          }
+        })
+        commit('setProjects', projects)
+      }
       commit('setUser', usr)
       commit('loading', false)
     } catch (error) {
+      commit('loading', false)
       console.log(error)
     }
   },
@@ -87,6 +115,37 @@ const actions = {
     location.href = '#/'
     commit('loading', false)
     location.reload()
+  },
+  
+  async newProject({ commit }, payload) {
+    try {
+      commit('loading', true)
+      let project = {
+        ...payload,
+      }
+      const newProject = await firebase.database().ref('projects').push(project)
+      await firebase.database().ref('projects').child(newProject.key).update({
+        key: newProject.key
+      })
+      commit('newProject', project)
+      commit('loading', false)
+    } catch (error) {
+      commit('loading', false)
+      console.log(error)
+    }
+  },
+  async newTask({ commit }, payload) {
+    try {
+      commit('loading', true)
+      await firebase.database().ref('projects').child(payload.key).child('tasks').push(payload)
+      const tasks = await firebase.database().ref('projects').child(payload.key).child('tasks').once('value')
+      console.log(tasks.val())
+      commit('setTasks', tasks.val())
+      commit('loading', false)
+    } catch (error) {
+      commit('loading', false)
+      console.log(error)
+    }
   }
 }
 
