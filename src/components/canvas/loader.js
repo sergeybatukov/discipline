@@ -59,7 +59,7 @@ export class Circle {
     this.vertices = 100
     this.radius = 100
     this.firstColor = 'black'
-    this.secondColor = '#857BFD'
+    this.secondColor = 'black'
     this.color = 'black'
     this.make()
   }
@@ -77,8 +77,8 @@ export class Circle {
   Draw() {
     this.time += 0.3
     var grad = ctx.createRadialGradient(
-      width / 2, height / 2, width / 4,
-      width / 2, height / 2, width
+      this.radius / 2, this.radius / 2, this.radius / 4,
+      this.radius / 2, this.radius / 2, this.radius
     )
     grad.addColorStop(0, this.firstColor)
     grad.addColorStop(0.7, this.secondColor)

@@ -6,15 +6,22 @@
     input.SingIn_input(v-model='user.lastName' v-if='!singIn' placeholder='Фамилия')
     input.SingIn_input(v-model='user.email' placeholder='E-mail')
     input.SingIn_input(type='password' v-model='user.password' placeholder='Пароль')
-    button.SingIn_btn(v-if='singIn' @click='logIn') Войти
-    button.SingIn_btn(v-if='!singIn' @click='registration') Создать
+    .SingIn_btn(v-if='singIn' @click='logIn' )
+      BTN(:text='"ВОЙТИ"')
+    .SingIn_btn(v-if='!singIn' @click='registration' )
+      BTN(:text='"СОЗДАТЬ"')
     span(@click='singIn = false' v-if='singIn') Регистрация
     span(@click='singIn = true' v-if='!singIn') Войти
 </template>
 
 <script>
+import BTN from '@/components/canvas/BTN.vue'
+
 export default {
   name: 'SingIn',
+  components: {
+    BTN
+  },
   data () {
     return {
       singIn: true,

@@ -4,41 +4,55 @@
       .Projects_newProject
         input(v-model='project.name' placeholder='Новый проект')
         textarea(v-model='project.description' placeholder='Описание...')
-        button(@click='newProject') Создать
+        .Projects_btn(@click='newProject' )
+          BTN(:text='"СОЗДАТЬ"')
     .popup(v-if='taskPopup')
       .Projects_tasks-make
         input(v-model='task.name' placeholder='Название')
         textarea(v-model='task.description' placeholder='Описание...')
-        button(@click='makeTask') Создать задачу
+        .Projects_btn(@click='makeTask(select)' )
+          BTN(:text='"СОЗДАТЬ ЗАДАЧУ"')
     .Projects_header
-      h1 Проекты
-      button(@click='projectForm = true') Новый проект
+      input(placeholder='Поиск' v-model='projectSearch')
+      .Projects_btn(@click='projectForm = true' )
+        BTN(:text='"НОВЫЙ ПРОЕКТ"')
     .Projects_body
       .Projects_list
         .Projects_list-item(
           v-for='(project, i) in projects'
           :key='i'
           @click='selectProject (project)'
+          :class='{Projects_list_active: isActive(project)}'
+          v-if='project.name.indexOf(projectSearch) != -1 || projectSearch == null'
         ) 
-          h2 {{ project.name }}
-          p {{ project.description }}
+          h2(:title='project.name')  {{ project.name }}
+          p(:title='project.description') {{ project.description }}
       .Projects_tasks-list(v-if='select.name')
         .Projects_tasks-list_header
           h1 {{ select.name }}
-          button(@click='taskPopup = true') +
+          .Projects_btn(@click='taskPopup = true' )
+            BTN(:text='"+"')
         .Projects_tasks-list_body
           p(
             v-for='(task, i) in select.tasks'
             :key='i'
             ) {{ task.name }}
+      .Projects_tasks-list(v-if='!select.name')
+        h1 Место для ваших проектов
 </template>
 
 <script>
+import BTN from '@/components/canvas/BTN.vue'
+
 export default {
   name: 'Projects',
+  components: {
+    BTN
+  },
   data () {
     return {
       projectForm: false,
+      projectSearch: null,
       taskPopup: false,
       task: {
         name: '',
@@ -55,6 +69,9 @@ export default {
     }
   },
   methods: {
+    isActive (project) {
+      return this.$store.getters.selectProject.key === project.key
+    },
     selectProject (item) {
       this.$store.state.selectProject = item
     },
@@ -71,8 +88,8 @@ export default {
         tasks: []
       }
     },
-    makeTask () {
-      this.task.key = this.select.key
+    makeTask (project) {
+      this.task.key = project.key
       this.$store.dispatch('newTask', this.task)
       this.taskPopup = false
     }
